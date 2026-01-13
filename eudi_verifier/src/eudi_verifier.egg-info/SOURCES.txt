@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/eudi_verifier/__init__.py
+src/eudi_verifier.egg-info/PKG-INFO
+src/eudi_verifier.egg-info/SOURCES.txt
+src/eudi_verifier.egg-info/dependency_links.txt
+src/eudi_verifier.egg-info/requires.txt
+src/eudi_verifier.egg-info/top_level.txt
+src/eudi_verifier/domain/__init__.py
+src/eudi_verifier/domain/clock.py
+src/eudi_verifier/domain/dcql.py
+src/eudi_verifier/domain/presentation.py
+src/eudi_verifier/domain/transaction_data.py
+src/eudi_verifier/domain/value_objects.py
+src/eudi_verifier/domain/verifier_config.py
+src/eudi_verifier/domain/wallet_response.py

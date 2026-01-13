@@ -1,0 +1,175 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eudi-verifier"
+version = "0.1.0"
+description = "EUDI Verifier Endpoint - OpenID4VP Verifier Implementation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "EUDI Team"}
+]
+keywords = ["openid4vp", "verifiable-credentials", "eudi", "digital-identity"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    # Web Framework
+    "fastapi[all]>=0.109.0,<0.110.0",
+    "uvicorn[standard]>=0.27.0,<0.28.0",
+    "pydantic>=2.5.3,<3.0.0",
+    "pydantic-settings>=2.1.0,<3.0.0",
+    "python-multipart>=0.0.6,<0.1.0",
+
+    # Functional Programming
+    "returns>=0.22.0,<0.23.0",
+    "attrs>=23.2.0,<24.0.0",
+
+    # Cryptography & JWT
+    "joserfc>=0.9.0,<1.0.0",
+    "jwcrypto>=1.5.1,<2.0.0",
+    "cryptography>=42.0.0,<43.0.0",
+
+    # Credential Validation
+    "sd-jwt>=0.10.0,<1.0.0",
+    "jsonschema>=4.21.1,<5.0.0",
+    "cbor2>=5.6.0,<6.0.0",
+    "pycose>=1.1.0,<2.0.0",
+    "asn1crypto>=1.5.1,<2.0.0",
+
+    # Certificate Handling
+    "pyOpenSSL>=24.0.0,<25.0.0",
+    "pyjks>=20.0.0,<21.0.0",
+
+    # HTTP & Scheduling
+    "httpx>=0.26.0,<0.27.0",
+    "apscheduler>=3.10.4,<4.0.0",
+
+    # Utilities
+    "qrcode[pil]>=7.4.2,<8.0.0",
+    "structlog>=24.1.0,<25.0.0",
+    "cachetools>=5.3.2,<6.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3,<8.0.0",
+    "pytest-asyncio>=0.21.1,<0.22.0",
+    "pytest-cov>=4.1.0,<5.0.0",
+    "pytest-mock>=3.12.0,<4.0.0",
+    "black>=23.12.1,<24.0.0",
+    "ruff>=0.1.9,<0.2.0",
+    "mypy>=1.8.0,<2.0.0",
+    "types-requests>=2.31.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/eu-digital-identity-wallet/eudi-srv-web-verifier-endpoint-python"
+Documentation = "https://github.com/eu-digital-identity-wallet/eudi-srv-web-verifier-endpoint-python/docs"
+Repository = "https://github.com/eu-digital-identity-wallet/eudi-srv-web-verifier-endpoint-python"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+eudi_verifier = ["py.typed"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=eudi_verifier",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+
+[tool.black]
+line-length = 120
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]  # imported but unused
+"tests/*" = ["B008"]  # function call in argument defaults
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+follow_imports = "normal"
+ignore_missing_imports = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*", "**/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if TYPE_CHECKING:",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "@abstractmethod",
+    "@abc.abstractmethod",
+]
