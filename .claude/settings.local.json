@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(python:*)",
+      "Bash(for file in \"/home/cyril/py_verifier_eudi/eudi_verifier/src/eudi_verifier/adapter/output/jose/jose_service_impl.py\" \"/home/cyril/py_verifier_eudi/eudi_verifier/src/eudi_verifier/api/routes/wallet.py\" \"/home/cyril/py_verifier_eudi/eudi_verifier/src/eudi_verifier/api/routes/ui.py\" \"/home/cyril/py_verifier_eudi/eudi_verifier/src/eudi_verifier/application/post_wallet_response_impl.py\" \"/home/cyril/py_verifier_eudi/eudi_verifier/src/eudi_verifier/application/init_transaction_impl.py\" \"/home/cyril/py_verifier_eudi/eudi_verifier/src/eudi_verifier/application/get_wallet_response_impl.py\" \"/home/cyril/py_verifier_eudi/eudi_verifier/src/eudi_verifier/application/get_request_object_impl.py\")",
+      "Bash(do echo \"=== $file ===\" grep \"from returns\" \"$file\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
