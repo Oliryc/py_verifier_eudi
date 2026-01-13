@@ -10,8 +10,9 @@ __pycache__/
 CLAUDE.md
 ./eudi-srv-web-verifier-endpoint-23220-4-kt
 eudi_wallet.md
-./.claude/settings.local.json
-./.claude
+.claude/settings.local.json
+.claude
+
 ./tests
 
 # Unit test / coverage reports
@@ -28,3 +29,4 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+
